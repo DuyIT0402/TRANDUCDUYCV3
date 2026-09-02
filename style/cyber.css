@@ -1378,6 +1378,7 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
   .log h3 small { color: #727d8e !important; font-size: 7pt !important; }
   .log p, .edu p { color: #596579 !important; font-size: 7.7pt !important; line-height: 1.48 !important; margin-bottom: 1.5mm !important; }
   .edu-grid { grid-template-columns: 1fr 1fr !important; gap: 3mm !important; }
+  .objective-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 2.5mm !important; }
   .edu { padding: 3mm !important; background: #fffefb !important; border: .3mm solid #e8dcc0 !important; border-top: .7mm solid #d5a62f !important; border-radius: 0 !important; }
   .col .tags { gap: 1.5mm !important; }
   .col .tags span { padding: 1mm 1.8mm !important; color: #87651d !important; background: #fff7df !important; border-color: #ddc47f !important; font-size: 5.8pt !important; }
