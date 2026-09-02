@@ -1435,7 +1435,9 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
   }
 
   .grid-floor {
-    opacity: 0.5; /* nền lưới mờ nhẹ cho nội dung nổi hơn */
+    opacity: 0.82; /* giữ nền lưới công nghệ rõ trên màn hình nhỏ */
+    height: 58vh;
+    background-size: 34px 34px;
   }
 
   /* ---- Topbar dính mép, trong suốt mượt ---- */

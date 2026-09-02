@@ -62,21 +62,17 @@ function tick() {
   }
   requestAnimationFrame(tick);
 }
-if (!isMobile) {
-  tick();
-} else {
-  // Mobile: chỉ vẽ tĩnh một lớp chấm nhẹ, không chạy vòng lặp
-  ctx.clearRect(0, 0, w, h);
-  for (const p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(0,240,255,0.45)";
-    ctx.fill();
-  }
-}
+tick();
 
 const introGate = document.getElementById("intro-gate");
 const enterCv = document.getElementById("enter-cv");
+
+function saveCvAsPdf() {
+  const originalTitle = document.title;
+  document.title = "CV - TRAN DUC DUY";
+  window.print();
+  setTimeout(() => { document.title = originalTitle; }, 1000);
+}
 
 if (introGate && enterCv) {
   enterCv.addEventListener("click", () => {
