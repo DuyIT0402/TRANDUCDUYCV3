@@ -125,8 +125,52 @@ body {
   text-shadow: 0 0 24px rgba(0, 240, 255, 0.75);
 }
 
-.gate-copy { margin: 20px 0 28px; color: var(--dim); line-height: 1.65; }
+.gate-copy { margin: 18px 0 6px; color: var(--dim); line-height: 1.65; }
 .gate-copy strong { color: var(--txt); letter-spacing: 0.08em; }
+
+.gate-portrait {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 18px;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.22), inset 0 0 14px rgba(0, 240, 255, 0.12);
+}
+
+.gate-portrait::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px dashed rgba(0, 240, 255, 0.35);
+  border-radius: 50%;
+  animation: orbit 12s linear infinite;
+}
+
+.gate-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.gate-name {
+  color: #fff;
+  font: 700 clamp(1.9rem, 5vw, 2.7rem)/1.15 "Space Grotesk", sans-serif;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 26px rgba(0, 240, 255, 0.8);
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.gate-role {
+  color: var(--cyan);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 26px;
+}
 
 .gate-enter {
   width: min(250px, 100%);
@@ -235,13 +279,6 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
 .btn-holo:hover {
   box-shadow: 0 0 18px rgba(0, 240, 255, 0.5);
   transform: translateY(-2px);
-}
-
-.btn-compact[aria-pressed="true"] {
-  color: #07111f;
-  background: var(--lime);
-  border-color: var(--lime);
-  box-shadow: 0 0 16px rgba(182, 255, 60, 0.35);
 }
 
 /* ===== HUD GRID ===== */
@@ -623,37 +660,43 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
     position: sticky;
     top: 8px;
     z-index: 10;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    padding: 12px 14px;
+    padding: 10px 14px;
     margin-bottom: 14px;
     border-radius: 12px;
   }
 
   .brand {
-    font-size: 1rem;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+  }
+
+  /* Trạng thái ONLINE rút gọn nằm cạnh brand, ẩn chữ dài */
+  .status-dot {
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
   }
 
   .topbar-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
 
-  .status-dot {
-    grid-column: 1 / -1;
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-  }
-
   .btn-holo {
-    min-height: 38px;
-    padding: 8px 10px;
-    font-size: 0.58rem;
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 0.56rem;
     letter-spacing: 0.08em;
     white-space: nowrap;
-    width: 100%;
+    width: auto;
   }
 
   .hud,
@@ -809,6 +852,10 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
   .status-dot {
     font-size: 0.52rem;
   }
+
+  .topbar-right .status-dot {
+    display: none; /* màn quá nhỏ: ẩn trạng thái, chỉ giữ brand + nút in */
+  }
 }
 
 @media (hover: none) {
@@ -821,114 +868,17 @@ body.is-entered .intro-gate { opacity: 0; visibility: hidden; pointer-events: no
 }
 
 /* ===== PRINT: 1 TRANG A4 SẠCH SẼ CHO HR ===== */
-/* ===== COMPACT MODE ===== */
-body.compact-mode .shell { max-width: 1080px; padding-top: 14px; }
-body.compact-mode .topbar { padding-block: 10px; margin-bottom: 14px; }
-body.compact-mode .hud { grid-template-columns: 285px 1fr; gap: 14px; }
-body.compact-mode .col { gap: 14px; }
-body.compact-mode .panel { padding: 17px 18px; }
-body.compact-mode .panel-id .portrait-ring { width: 104px; height: 104px; margin-bottom: 12px; }
-body.compact-mode .panel-id h1 { font-size: 1.36rem; }
-body.compact-mode .sec-title { margin: 18px 0 9px; }
-body.compact-mode .contact li { padding: 4px 0; }
-body.compact-mode .skill { margin-bottom: 8px; }
-body.compact-mode .tags { gap: 6px; }
-body.compact-mode .tags span { padding: 5px 9px; font-size: 0.57rem; }
-body.compact-mode .accent { margin-bottom: 8px; }
-body.compact-mode .intro-copy { font-size: 0.96rem; line-height: 1.62; }
-body.compact-mode .log p, body.compact-mode .edu p { line-height: 1.55; margin-bottom: 7px; }
-body.compact-mode .edu-grid { gap: 12px; }
-body.compact-mode .edu { padding: 12px; }
-body.compact-mode .foot { margin-top: 16px; }
-
-/* Bản gọn mang cảm giác thư mục hồ sơ: mỗi phần là một file độc lập. */
-body.compact-mode .panel {
-  overflow: visible;
-  padding-top: 31px;
-  border-radius: 4px 12px 12px 12px;
-  background: linear-gradient(135deg, rgba(14, 24, 52, 0.82), rgba(8, 13, 31, 0.68));
-}
-
-body.compact-mode .panel::before {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  z-index: 1;
-  padding: 7px 13px 6px;
-  color: var(--cyan);
-  background: #111d3a;
-  border: 1px solid var(--line);
-  border-bottom: none;
-  border-radius: 6px 8px 0 0;
-  font: 700 0.56rem/1 "Orbitron", monospace;
-  letter-spacing: 0.13em;
-  box-shadow: 8px 0 18px rgba(0, 240, 255, 0.08);
-}
-
-body.compact-mode .panel-id::before { content: "ROOT / PROFILE"; }
-body.compact-mode .col .panel:nth-child(1)::before { content: "01 / PROFILE"; }
-body.compact-mode .col .panel:nth-child(2)::before { content: "02 / EDUCATION"; }
-body.compact-mode .col .panel:nth-child(3)::before { content: "03 / EXPERIENCE"; }
-body.compact-mode .col .panel:nth-child(4)::before { content: "04 / NOTES"; }
-body.compact-mode .col .panel:nth-child(5)::before { content: "05 / INTERESTS"; }
-
-body.compact-mode .accent {
-  color: #dce9ff;
-  text-shadow: none;
-}
-
-body.compact-mode .edu {
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 900px) {
-  body.compact-mode .hud { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 640px) {
-  body.compact-mode .shell { padding-top: 10px; }
-  body.compact-mode .topbar { padding: 10px 12px; }
-  body.compact-mode .panel { padding: 15px; }
-  body.compact-mode .panel { padding-top: 29px; }
-  body.compact-mode .panel-id .portrait-ring { width: 82px; height: 82px; margin: 0; }
-  body.compact-mode .sec-title { margin-top: 17px; }
-}
-
 @media print {
   @page {
     size: A4;
     margin: 0;
   }
 
-  /* Bản in luôn dùng bố cục CV chuẩn, kể cả khi đang bật chế độ thư mục. */
-  body:not(.is-entered) .shell,
-  body.compact-mode .shell {
+  body:not(.is-entered) .shell {
     filter: none;
     opacity: 1;
     max-width: 100%;
     padding: 0;
-  }
-
-  body.compact-mode .hud {
-    grid-template-columns: 72mm 1fr;
-    gap: 0;
-  }
-
-  body.compact-mode .col {
-    gap: 0 !important;
-    height: 297mm;
-    padding: 12mm 10mm;
-  }
-
-  body.compact-mode .panel,
-  body.compact-mode .panel-id {
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  body.compact-mode .panel::before {
-    display: none;
   }
 
   html,
@@ -1431,4 +1381,152 @@ body.compact-mode .edu {
   .edu { padding: 3mm !important; background: #fffefb !important; border: .3mm solid #e8dcc0 !important; border-top: .7mm solid #d5a62f !important; border-radius: 0 !important; }
   .col .tags { gap: 1.5mm !important; }
   .col .tags span { padding: 1mm 1.8mm !important; color: #87651d !important; background: #fff7df !important; border-color: #ddc47f !important; font-size: 5.8pt !important; }
+}
+
+/* ===== MOBILE POLISH — tối ưu trải nghiệm điện thoại ===== */
+@media screen and (max-width: 640px) {
+
+  /* ---- Gate màn hình mở hồ sơ ---- */
+  .intro-gate {
+    padding: 16px;
+  }
+
+  .gate-card {
+    padding: 34px 20px 24px;
+  }
+
+  .gate-card h1.gate-name {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .gate-portrait {
+    width: 108px;
+    height: 108px;
+    margin-bottom: 14px;
+  }
+
+  .gate-role {
+    margin-bottom: 22px;
+    white-space: normal;
+    line-height: 1.7;
+  }
+
+  .gate-copy {
+    margin: 16px 0 22px;
+    font-size: 0.88rem;
+  }
+
+  .gate-enter {
+    width: 100%;
+    max-width: 260px;
+    min-height: 48px; /* tap target thoải mái cho ngón tay */
+    padding: 14px 18px;
+    font-size: 0.74rem;
+  }
+
+  .gate-orbit {
+    animation: none; /* bớt animation nặng trên mobile */
+    border-color: rgba(0, 240, 255, 0.1);
+  }
+
+  /* ---- Shell & nền ---- */
+  .shell {
+    padding: 10px 12px 32px;
+  }
+
+  .grid-floor {
+    opacity: 0.5; /* nền lưới mờ nhẹ cho nội dung nổi hơn */
+  }
+
+  /* ---- Topbar dính mép, trong suốt mượt ---- */
+  .topbar {
+    top: 10px;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(8, 13, 32, 0.82);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+
+  .btn-holo {
+    min-height: 44px; /* tiêu chuẩn tap target */
+    font-size: 0.6rem;
+  }
+
+  /* ---- Panel ID: avatar + tên cân đối ---- */
+  .panel-id {
+    grid-template-columns: 92px 1fr;
+    padding: 20px 18px;
+  }
+
+  .portrait-ring {
+    width: 92px;
+    height: 92px;
+  }
+
+  .contact {
+    font-size: 0.82rem;
+  }
+
+  .contact li {
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(0, 240, 255, 0.12);
+  }
+
+  .contact li:last-child {
+    border-bottom: none;
+  }
+
+  .contact a {
+    display: block;
+    padding: 2px 0;
+    -webkit-tap-highlight-color: rgba(0, 240, 255, 0.15);
+  }
+
+  /* ---- Nội dung dễ đọc ---- */
+  .panel {
+    padding: 20px 18px;
+  }
+
+  .intro-copy {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .log p,
+  .edu p {
+    font-size: 0.88rem;
+  }
+
+  .skill {
+    padding: 6px 0;
+  }
+
+  .tags span {
+    padding: 8px 11px; /* tag to hơn, dễ nhìn */
+  }
+
+  .edu {
+    padding: 16px;
+  }
+
+  .foot {
+    text-align: center;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+/* Màn hình rất nhỏ (≤ 360px) */
+@media screen and (max-width: 360px) {
+  .panel-id {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .portrait-ring {
+    width: 72px;
+    height: 72px;
+  }
+
+  .tags span {
+    font-size: 0.55rem;
+  }
 }

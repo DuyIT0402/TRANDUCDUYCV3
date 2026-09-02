@@ -1,8 +1,10 @@
 // Nền hạt mạng lưới — các chấm cyan di chuyển và nối nhau bằng tia sáng
+// Trên mobile (màn nhỏ + cảm ứng) tắt particle để mượt và tiết pin
+const isMobile = matchMedia("(max-width: 640px)").matches || matchMedia("(hover: none)").matches;
 const canvas = document.getElementById("bg-particles");
 const ctx = canvas.getContext("2d");
 let w, h, particles = [];
-const N = 70, LINK = 130;
+const N = isMobile ? 28 : 70, LINK = 130;
 
 function resize() {
   w = canvas.width = innerWidth;
@@ -60,23 +62,17 @@ function tick() {
   }
   requestAnimationFrame(tick);
 }
-tick();
-
-const compactToggle = document.getElementById("compact-toggle");
-const compactKey = "duy-cv-compact-mode";
-
-function setCompactMode(enabled) {
-  document.body.classList.toggle("compact-mode", enabled);
-  compactToggle.setAttribute("aria-pressed", String(enabled));
-  compactToggle.textContent = enabled ? "▣ CHẾ ĐỘ ĐẦY ĐỦ" : "▣ CHẾ ĐỘ THƯ MỤC";
-  localStorage.setItem(compactKey, String(enabled));
-}
-
-if (compactToggle) {
-  setCompactMode(localStorage.getItem(compactKey) === "true");
-  compactToggle.addEventListener("click", () => {
-    setCompactMode(!document.body.classList.contains("compact-mode"));
-  });
+if (!isMobile) {
+  tick();
+} else {
+  // Mobile: chỉ vẽ tĩnh một lớp chấm nhẹ, không chạy vòng lặp
+  ctx.clearRect(0, 0, w, h);
+  for (const p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(0,240,255,0.45)";
+    ctx.fill();
+  }
 }
 
 const introGate = document.getElementById("intro-gate");
